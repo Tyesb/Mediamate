@@ -15,6 +15,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -31,9 +34,10 @@ import existmediasolutions.mediamate.R;
  * Use the {@link AroundMe#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AroundMe extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMarkerClickListener
+public class AroundMe extends Fragment
 {
     private GoogleMap mMap;
+    private MapView mMapView;
     private GoogleApiClient mGoogleApiClient;
     private OnFragmentInteractionListener mListener;
 
@@ -41,16 +45,9 @@ public class AroundMe extends FragmentActivity implements OnMapReadyCallback, Go
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AroundMe.
-     */
+
     // TODO: Rename and change types and number of parameters
-    public static AroundMe newInstance(String param1, String param2) {
+    public static AroundMe newInstance() {
         AroundMe fragment = new AroundMe();
         Bundle args = new Bundle();
 //        fragment.setArguments(args);
@@ -60,25 +57,17 @@ public class AroundMe extends FragmentActivity implements OnMapReadyCallback, Go
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.mapView);
-        mapFragment.getMapAsync(this);
 
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                    .addConnectionCallbacks(this)
-//                    .addOnConnectionFailedListener(this)
-//                    .addApi(LocationServices.API)
-                    .build();
-        }
     }
 
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_around_me, container, false);
-//    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.fragment_around_me, container,
+                false);
+
+        return v;
+    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -98,14 +87,14 @@ public class AroundMe extends FragmentActivity implements OnMapReadyCallback, Go
 //        }
 //    }
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         // 2
         mGoogleApiClient.connect();
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         // 3
         if( mGoogleApiClient != null && mGoogleApiClient.isConnected() ) {
@@ -113,43 +102,43 @@ public class AroundMe extends FragmentActivity implements OnMapReadyCallback, Go
         }
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-//        mMap.setOnMarkerClickListener(this.mMap);
-    }
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        mMap = googleMap;
+//
+//        // Add a marker in Sydney and move the camera
+//        LatLng sydney = new LatLng(-34, 151);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        mMap.getUiSettings().setZoomControlsEnabled(true);
+////        mMap.setOnMarkerClickListener(this.mMap);
+//    }
 
 //    @Override
 //    public void onDetach() {
 //        super.onDetach();
 //        mListener = null;
 //    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        return false;
-    }
+//
+//    @Override
+//    public void onConnected(@Nullable Bundle bundle) {
+//
+//    }
+//
+//    @Override
+//    public void onConnectionSuspended(int i) {
+//
+//    }
+//
+//    @Override
+//    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+//
+//    }
+//
+//    @Override
+//    public boolean onMarkerClick(Marker marker) {
+//        return false;
+//    }
 
     /**
      * This interface must be implemented by activities that contain this

@@ -8,7 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.VideoView;
+
+import com.labo.kaji.fragmentanimations.CubeAnimation;
 
 import existmediasolutions.mediamate.R;
 
@@ -26,6 +29,11 @@ public class MotelVideoView extends Fragment {
 
 
     private OnFragmentInteractionListener mListener;
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        return CubeAnimation.create(CubeAnimation.UP, enter, 10);
+    }
 
     public MotelVideoView() {
         // Required empty public constructor

@@ -18,6 +18,25 @@ import existmediasolutions.mediamate.views.FacilityGridViewItem;
 public class DeviceInformation extends Application {
 
     public int DeviceId;
+
+    public DeviceInformation(int deviceId, String hotelName, int roomNumber, String userData, int theme_ID, String leftButtonUrl, String rightButtonUrl, String bottomButtonUrl, String motelAddress, double motelLong, double motelLat, String motelVideo) {
+        DeviceId = deviceId;
+        HotelName = hotelName;
+        RoomNumber = roomNumber;
+        UserData = userData;
+        Theme_ID = theme_ID;
+        LeftButtonUrl = leftButtonUrl;
+        RightButtonUrl = rightButtonUrl;
+        BottomButtonUrl = bottomButtonUrl;
+        MotelAddress = motelAddress;
+        MotelLong = motelLong;
+        MotelLat = motelLat;
+        MotelVideo = motelVideo;
+        Facilities = new ArrayList<Facility>();
+        Advertisers = new ArrayList<Advertiser>();
+
+    }
+
     public String HotelName;
     public int RoomNumber;
     public String UserData;
@@ -32,20 +51,7 @@ public class DeviceInformation extends Application {
     public ArrayList<Facility> Facilities;
     public ArrayList<Advertiser> Advertisers;
 
-    public void SimulateDataGet(){
-        String detailsString = "A Brief Blurb describing the customers selection, the pool is found here; the cooked breakfast includes; yadayada";
-        setHotelName("Test Hotel");
-        setRoomNumber(1);
-        setUserData("player@gmail.com");
-        setTheme_ID(1);
-        setLeftButtonUrl("http://103.242.48.22:65428/resources/new_layout/left_button.png");
-        setRightButtonUrl("http://103.242.48.22:65428/resources/new_layout/right_button.png");
-        setMotelAddress("107 Duke Street");
-        setMotelLong(174.745331);
-        setMotelLat(-36.866549);
-        setMotelVideo("http://103.242.48.22:65428/resources/new_layout/main_roll.wmv");
 
-    }
 
 
     public int getDeviceId() {

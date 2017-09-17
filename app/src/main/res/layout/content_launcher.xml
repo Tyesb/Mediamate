@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="#ff000000"
+    android:clickable="true"
+    >
 
     <ImageButton
         android:id="@+id/homeLeftButton"
@@ -17,7 +20,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:clickable="true">
 
         <!--<VideoView-->
             <!--android:id="@+id/homeVideoView"-->
@@ -29,20 +33,32 @@
         <FrameLayout
             android:id="@+id/TopCenter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
         </FrameLayout>
 
-        <GridView
-            android:id="@+id/homeGridView"
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:id="@+id/LowGridView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="#ff000000"
+            android:clickable="true"
             android:focusable="true"
-            android:stretchMode="columnWidth"
-            android:visibility="visible"
-            tools:style="@android:style/Widget.Material.GridView" />
+            android:focusableInTouchMode="true">
+
+        </FrameLayout>
+
+        <!--<GridView-->
+            <!--android:id="@+id/homeGridView"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:background="#ff000000"-->
+            <!--android:focusable="true"-->
+            <!--android:stretchMode="columnWidth"-->
+            <!--android:visibility="visible"-->
+            <!--tools:style="@android:style/Widget.Material.GridView" />-->
     </RelativeLayout>
 
     <ImageButton
