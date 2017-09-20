@@ -25,32 +25,39 @@ import existmediasolutions.mediamate.fragments.FacilityDetailView;
 import existmediasolutions.mediamate.fragments.FacilityFragment;
 import existmediasolutions.mediamate.fragments.MotelVideoView;
 import existmediasolutions.mediamate.fragments.dummy.DummyContent;
+import existmediasolutions.mediamate.handler.ApiClient;
+import existmediasolutions.mediamate.handler.ApiHandler;
+import existmediasolutions.mediamate.handler.ApiInterface;
 import existmediasolutions.mediamate.models.DeviceInformation;
 import existmediasolutions.mediamate.models.Facility;
+import retrofit2.Response;
 
-public class LauncherActivity extends AppCompatActivity implements MotelVideoView.OnFragmentInteractionListener, FacilityFragment.OnListFragmentInteractionListener, FacilityDetailView.OnFragmentInteractionListener{
-
+public class LauncherActivity extends AppCompatActivity implements MotelVideoView.OnFragmentInteractionListener, FacilityFragment.OnListFragmentInteractionListener, FacilityDetailView.OnFragmentInteractionListener, ApiHandler.onApiCallbackResponse{
+    ApiHandler apiHandler = new ApiHandler();
     ImageView leftHomeButton;
     ImageView rightHomeButton;
     ArrayList<Facility> mainMenu = new ArrayList<Facility>();
-    DeviceInformation deviceInformation = new  DeviceInformation(1,"A Brief Blurb describing the customers selection, the pool is found here; the cooked breakfast includes; yadayada",
-    202,
-    "Test Hotel",
-    1,
-    "player@gmail.com",
-    "http://103.242.48.22:65428/resources/new_layout/left_button.png",
-    "http://103.242.48.22:65428/resources/new_layout/right_button.png",
-    "107 Duke Street",
-    174.745331,
-    -36.866549,
-    "http://103.242.48.22:65428/resources/new_layout/main_roll.wmv");
-    String facilityImageUrl = "http://swpool.azureedge.net/cdn/farfuture/7mwzsesooaBw9yz3t08UecJ8iUGI1z1MLm3OPTKn_wU/md5:4c26bfdd8215af9418764c0c268af60c/sites/default/files/styles/pool_photo_gallery_thumbnail/public/Gallery/Inground%20Pools/california_negative_edge_swimming_pool.jpg?itok=oLzhp6c3";
+//    DeviceInformation deviceInformation = new  DeviceInformation(1,"A Brief Blurb describing the customers selection, the pool is found here; the cooked breakfast includes; yadayada",
+//    202,
+//    "Test Hotel",
+//    1,
+//    "player@gmail.com",
+//    "http://103.242.48.22:65428/resources/new_layout/left_button.png",
+//    "http://103.242.48.22:65428/resources/new_layout/right_button.png",
+//    "107 Duke Street",
+//    174.745331,
+//    -36.866549,
+//    "http://103.242.48.22:65428/resources/new_layout/main_roll.wmv");
+//    String facilityImageUrl = "http://swpool.azureedge.net/cdn/farfuture/7mwzsesooaBw9yz3t08UecJ8iUGI1z1MLm3OPTKn_wU/md5:4c26bfdd8215af9418764c0c268af60c/sites/default/files/styles/pool_photo_gallery_thumbnail/public/Gallery/Inground%20Pools/california_negative_edge_swimming_pool.jpg?itok=oLzhp6c3";
+    ApiInterface apiInterface;
+    DeviceInformation deviceInformation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-        BuildBullshitObjects();
+        apiCall();
+//        BuildBullshitObjects();
         buildMainMenu();
         if (savedInstanceState == null) {
 //            android.support.v4.app.Fragment mMapFragment = SupportMapFragment.newInstance();
@@ -64,27 +71,31 @@ public class LauncherActivity extends AppCompatActivity implements MotelVideoVie
         }
         hideStatusBar();
         setViews();
-        updateDisplayObjects();
+
 
     }
 
     public void buildMainMenu(){
-        mainMenu.add(new Facility("Compendium", getResources().getDrawable(R.drawable.reception), "The Motels Compendium", facilityImageUrl));
-        mainMenu.add(new Facility("Facilities", getResources().getDrawable(R.drawable.pool), "More Details About The Facilities Availble Here", facilityImageUrl));
-        mainMenu.add(new Facility("Around Me", getResources().getDrawable(R.drawable.massage_facility), "Show Partnered Business Near You", facilityImageUrl));
-        mainMenu.add(new Facility("Requests", getResources().getDrawable(R.drawable.spaicon), "Request Services", facilityImageUrl));
+        mainMenu.add(new Facility("Compendium", getResources().getDrawable(R.drawable.reception), "The Motels Compendium", ""));
+        mainMenu.add(new Facility("Facilities", getResources().getDrawable(R.drawable.pool), "More Details About The Facilities Availble Here", ""));
+        mainMenu.add(new Facility("Around Me", getResources().getDrawable(R.drawable.massage_facility), "Show Partnered Business Near You", ""));
+        mainMenu.add(new Facility("Requests", getResources().getDrawable(R.drawable.spaicon), "Request Services", ""));
 
     }
 
-
-    private void BuildBullshitObjects(){
-        deviceInformation.Facilities.add(new Facility("Spa", getResources().getDrawable(R.drawable.spaicon), "details about this", facilityImageUrl));
-        deviceInformation.Facilities.add(new Facility("Sauna", getResources().getDrawable(R.drawable.sauna), "details about this", facilityImageUrl));
-        deviceInformation.Facilities.add(new Facility("Pool", getResources().getDrawable(R.drawable.pool), "details about this", facilityImageUrl));
-        deviceInformation.Facilities.add(new Facility("Bar", getResources().getDrawable(R.drawable.bar), "details about this", facilityImageUrl));
-        deviceInformation.Facilities.add(new Facility("Restaurant", getResources().getDrawable(R.drawable.resturaunt), "details about this", facilityImageUrl));
-        deviceInformation.Facilities.add(new Facility("Go Back", getResources().getDrawable(R.drawable.go_back), "details about this", facilityImageUrl));
+    public void apiCall(){
+       apiHandler.GetDeviceInfo(this);
     }
+
+//
+//    private void BuildBullshitObjects(){
+//        deviceInformation.Facilities.add(new Facility("Spa", getResources().getDrawable(R.drawable.spaicon), "details about this", facilityImageUrl));
+//        deviceInformation.Facilities.add(new Facility("Sauna", getResources().getDrawable(R.drawable.sauna), "details about this", facilityImageUrl));
+//        deviceInformation.Facilities.add(new Facility("Pool", getResources().getDrawable(R.drawable.pool), "details about this", facilityImageUrl));
+//        deviceInformation.Facilities.add(new Facility("Bar", getResources().getDrawable(R.drawable.bar), "details about this", facilityImageUrl));
+//        deviceInformation.Facilities.add(new Facility("Restaurant", getResources().getDrawable(R.drawable.resturaunt), "details about this", facilityImageUrl));
+//        deviceInformation.Facilities.add(new Facility("Go Back", getResources().getDrawable(R.drawable.go_back), "details about this", facilityImageUrl));
+//    }
 
     //TODO: Move these to fragments
     public void setViews() {
@@ -99,9 +110,11 @@ public class LauncherActivity extends AppCompatActivity implements MotelVideoVie
                 .into(imageView);
     }
 
+    //"103.242.48.22:65428/resources/new_layout/left_button.png"
+    //"103.242.48.22:65428/resources/new_layout/right_button.png"
     public void updateDisplayObjects(){
-        updateImageViews(leftHomeButton, "103.242.48.22:65428/resources/new_layout/left_button.png");
-        updateImageViews(rightHomeButton, "103.242.48.22:65428/resources/new_layout/right_button.png");
+        updateImageViews(leftHomeButton, deviceInformation.getMotelModel().getThemeModel().getLeftButtonUrl() );
+        updateImageViews(rightHomeButton, deviceInformation.getMotelModel().getThemeModel().getRightButtonUrl() );
     }
 
     //Hide Action Bar
@@ -115,21 +128,25 @@ public class LauncherActivity extends AppCompatActivity implements MotelVideoVie
         //you can leave it empty
     }
 
+    public void onApiCallbackListener(DeviceInformation device){
+        deviceInformation = device;
+        updateDisplayObjects();
+    }
+
     @Override
     public void onListFragmentInteraction(String title, int position ) {
         if (title == "Compendium") {
             swapToVideoView();
         } else if (title == "Facilities") {
-            swapToFacilitysMenu();
+//            swapToFacilitysMenu();
         } else if (title == "Around Me"){
             swapToMapView();
         } else if (title == "Go Back"){
             swapToMainMenu();
         } else {
-            Facility facility = deviceInformation.Facilities.get(position);
-            swapToFacilitiesDetailView(facility.getFacilityDescription(), facility.getFacilityImage());
+//            Facility facility = deviceInformation.Facilities.get(position);
+//            swapToFacilitiesDetailView(facility.getFacilityDescription(), facility.getFacilityImage());
         }
-
 
     }
 
@@ -156,12 +173,12 @@ public class LauncherActivity extends AppCompatActivity implements MotelVideoVie
 
     }
 
-    private void swapToFacilitysMenu(){
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.LowGridView, FacilityFragment.newInstance(deviceInformation.Facilities.size(),deviceInformation.getFacilities()), "Faciltiy Grid View")
-                .commit();
-    }
+//    private void swapToFacilitysMenu(){
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.LowGridView, FacilityFragment.newInstance(deviceInformation.Facilities.size(),deviceInformation.getFacilities()), "Faciltiy Grid View")
+//                .commit();
+//    }
 
     private void swapToVideoView(){
         getSupportFragmentManager()
