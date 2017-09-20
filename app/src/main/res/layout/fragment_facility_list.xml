@@ -6,9 +6,12 @@
     android:name="existmediasolutions.mediamate.fragments.FacilityFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
+    android:contextClickable="true"
+    android:descendantFocusability="beforeDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:visibility="visible"
-    tools:style="@android:style/Widget.Material.GridView"
     tools:context="existmediasolutions.mediamate.fragments.FacilityFragment"
-    tools:listitem="@layout/fragment_facility" />
+    tools:listitem="@layout/fragment_facility"
+    tools:style="@android:style/Widget.Material.GridView" />

@@ -73,6 +73,7 @@ public class FacilityDetailView extends Fragment {
         TextView facilityDetailStringDisplay = (TextView) root.findViewById(R.id.FacilityDetailTextView);
         ImageView facilityDetailImageDisplay = (ImageView) root.findViewById(R.id.FacilityDetailViewImage);
         updateDisplayProperties(facilityDetailStringDisplay, facilityDetailImageDisplay);
+        root.requestFocus();
         return inflater.inflate(R.layout.fragment_facility_detail_view, container, false);
     }
 

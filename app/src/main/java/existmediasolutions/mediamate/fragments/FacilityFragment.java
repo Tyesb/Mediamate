@@ -112,7 +112,7 @@ public class FacilityFragment extends Fragment {
             recyclerView.setAdapter(new FacilityGridViewAdapter(buttons, mListener));
 
         }
-
+        view.requestFocus();
         return view;
     }
 
