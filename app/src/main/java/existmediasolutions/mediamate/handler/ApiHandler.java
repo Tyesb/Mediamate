@@ -2,9 +2,11 @@ package existmediasolutions.mediamate.handler;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import existmediasolutions.mediamate.LauncherActivity;
 import existmediasolutions.mediamate.models.DeviceInformation;
+import existmediasolutions.mediamate.models.Request;
 import retrofit2.Call;
 
 import retrofit2.Callback;
@@ -39,6 +41,27 @@ public class ApiHandler {
 
         });
 //        return deviceInformation;
+    }
+
+    public void sendRequest(){
+//        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Request request = new Request("1","222","sent From app", "","1","2017-09-21T18:10:31");
+        Call call1 = apiInterface.doCreateRequest("1","222","sent From app", "","1","2017-09-21T18:10:31");
+        call1.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                String success = response.body().toString();
+
+//                Toast.makeText(getApplicationContext(), success, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                call.cancel();
+            }
+        });
+
     }
 
 

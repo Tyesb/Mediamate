@@ -1,24 +1,25 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="existmediasolutions.mediamate.fragments.FacilityDetailView">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <ImageView
         android:id="@+id/FacilityDetailViewImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:color/background_dark" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:visibility="visible"
+        app:srcCompat="@color/colorAccent" />
 
     <TextView
         android:id="@+id/FacilityDetailTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_weight="1"
         android:textColor="@color/common_google_signin_btn_text_dark_pressed"
         android:visibility="visible" />
 
-</FrameLayout>
+</android.support.v7.widget.LinearLayoutCompat>

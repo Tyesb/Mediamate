@@ -37,6 +37,7 @@ public class FacilityFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 4;
     private OnListFragmentInteractionListener mListener;
+    private OnFacilityFragmentReadyListener readyListener;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -47,7 +48,7 @@ public class FacilityFragment extends Fragment {
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return FlipAnimation.create(FlipAnimation.UP, enter, 10);
+        return FlipAnimation.create(FlipAnimation.UP, enter, 1000);
     }
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
@@ -67,29 +68,6 @@ public class FacilityFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-        getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-
-            @Override
-            public void onBackStackChanged() {
-                if (getView()!=null){
-                    getView().setFocusableInTouchMode(true);
-                    getView().requestFocus();
-
-                }
-            }
-        });
-
-    }
-
-    @Override
-    public void onResume(){
-        getView().post(new Runnable() {
-            @Override
-            public void run() {
-                getView().requestFocus();
-            }
-        });
-        super.onResume();
     }
 
     @Override
@@ -110,9 +88,10 @@ public class FacilityFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             recyclerView.setAdapter(new FacilityGridViewAdapter(buttons, mListener));
-
+            recyclerView.requestFocus();
         }
-        view.requestFocus();
+
+        readyListener.onFacilityComplete(view);
         return view;
     }
 
@@ -123,6 +102,7 @@ public class FacilityFragment extends Fragment {
 
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
+            readyListener = (OnFacilityFragmentReadyListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -148,5 +128,9 @@ public class FacilityFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(String title, int position);
+    }
+
+    public interface OnFacilityFragmentReadyListener{
+        public void onFacilityComplete(View v);
     }
 }

@@ -28,12 +28,14 @@ import existmediasolutions.mediamate.R;
 public class FacilityDetailView extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "FacilityImage";
+    private static final String ARG_PARAM2 = "FacilityDescription";
 
     // TODO: Rename and change types of parameters
     private String FacilityImageUrl;
     private String FacilityDetailsString;
+    ImageView facilityDetailImageDisplay;
+    TextView facilityDetailStringDisplay;
 
     private OnFragmentInteractionListener mListener;
 
@@ -43,7 +45,7 @@ public class FacilityDetailView extends Fragment {
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return CubeAnimation.create(CubeAnimation.UP, enter, 100);
+        return CubeAnimation.create(CubeAnimation.UP, enter, 1000);
     }
 
     // TODO: Rename and change types and number of parameters
@@ -59,33 +61,35 @@ public class FacilityDetailView extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            FacilityImageUrl = getArguments().getString(ARG_PARAM1);
-            FacilityDetailsString = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        if (getArguments() != null) {
+            FacilityImageUrl = getArguments().getString(ARG_PARAM1);
+            FacilityDetailsString = getArguments().getString(ARG_PARAM2);
+        }
         View root = inflater.inflate(R.layout.fragment_facility_detail_view, container, false);
-        TextView facilityDetailStringDisplay = (TextView) root.findViewById(R.id.FacilityDetailTextView);
-        ImageView facilityDetailImageDisplay = (ImageView) root.findViewById(R.id.FacilityDetailViewImage);
-        updateDisplayProperties(facilityDetailStringDisplay, facilityDetailImageDisplay);
-        root.requestFocus();
-        return inflater.inflate(R.layout.fragment_facility_detail_view, container, false);
+
+        facilityDetailStringDisplay = (TextView) root.findViewById(R.id.FacilityDetailTextView);
+        facilityDetailImageDisplay = (ImageView) root.findViewById(R.id.FacilityDetailViewImage);
+        facilityDetailStringDisplay.setText(FacilityDetailsString);
+        updateImageView();
+//        updateDisplayProperties();
+
+        return root;
+    }
+    //FacilityDetailsString,
+    private void updateDisplayProperties(){
+
     }
 
-    private void updateDisplayProperties(TextView textView, ImageView imageView){
-        textView.setText(FacilityDetailsString);
-        updateImageView(imageView);
-
-    }
-
-    private void updateImageView(ImageView imageView){
+    private void updateImageView(){
         Picasso.with(getContext()).load((FacilityImageUrl)).placeholder(R.drawable.spaicon)
-                .into(imageView);
+                .into(facilityDetailImageDisplay);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

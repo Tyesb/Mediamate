@@ -26,22 +26,23 @@ import existmediasolutions.mediamate.R;
 public class MotelVideoView extends Fragment {
 
     private VideoView motelVideoView;
+    private static final String ARG_VIDEO_URI = "VideoUri";
 
 
     private OnFragmentInteractionListener mListener;
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        return CubeAnimation.create(CubeAnimation.UP, enter, 10);
+        return CubeAnimation.create(CubeAnimation.UP, enter, 1000);
     }
 
     public MotelVideoView() {
         // Required empty public constructor
     }
 
-    private void initVidView()
+    private void initVidView(String videoUri)
     {
-        getVideo("http://103.242.48.22:65428/resources/new_layout/main_roll.wmv");
+        getVideo(videoUri);
         startPlayback();
     }
     private void startPlayback()
@@ -55,8 +56,10 @@ public class MotelVideoView extends Fragment {
     }
 
 
-    public static MotelVideoView newInstance() {
+    public static MotelVideoView newInstance(String videoUri) {
         MotelVideoView fragment = new MotelVideoView();
+        Bundle args = new Bundle();
+        args.putString(ARG_VIDEO_URI, videoUri);
         return fragment;
     }
 
@@ -64,6 +67,7 @@ public class MotelVideoView extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -71,7 +75,10 @@ public class MotelVideoView extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_video_view, container, false);
         motelVideoView = (VideoView) root.findViewById(R.id.homeVideoView);
-        initVidView();
+        Bundle args = getArguments();
+        if (getArguments() != null){
+            initVidView(getArguments().getString(ARG_VIDEO_URI));
+        }
         return root;
     }
 

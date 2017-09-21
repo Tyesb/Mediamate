@@ -5,6 +5,7 @@ package existmediasolutions.mediamate.models;
  */
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -47,7 +48,7 @@ public class MotelModel implements Serializable
     private String phoneNumber;
     @SerializedName("FacilitiesModels")
     @Expose
-    private List<FacilitiesModel> facilitiesModels = null;
+    private ArrayList<FacilitiesModel> facilitiesModels = null;
     @SerializedName("Advertisers")
     @Expose
     private List<Advertiser> advertisers = null;
@@ -80,7 +81,7 @@ public class MotelModel implements Serializable
      * @param motellong
      * @param rooms
      */
-    public MotelModel(Integer id, String name, String userData, ThemeModel themeModel, Integer themeModelId, String address, Double motellong, Double motelLat, String motelVideo, Integer rooms, String phoneNumber, List<FacilitiesModel> facilitiesModels, List<Advertiser> advertisers, List<Object> deviceModel) {
+    public MotelModel(Integer id, String name, String userData, ThemeModel themeModel, Integer themeModelId, String address, Double motellong, Double motelLat, String motelVideo, Integer rooms, String phoneNumber, ArrayList<FacilitiesModel> facilitiesModels, List<Advertiser> advertisers, List<Object> deviceModel) {
         super();
         this.id = id;
         this.name = name;
@@ -186,11 +187,11 @@ public class MotelModel implements Serializable
         this.phoneNumber = phoneNumber;
     }
 
-    public List<FacilitiesModel> getFacilitiesModels() {
+    public ArrayList<FacilitiesModel> getFacilitiesModels() {
         return facilitiesModels;
     }
 
-    public void setFacilitiesModels(List<FacilitiesModel> facilitiesModels) {
+    public void setFacilitiesModels(ArrayList<FacilitiesModel> facilitiesModels) {
         this.facilitiesModels = facilitiesModels;
     }
 

@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:layout_weight="0.1"
         android:background="#ff000000"
+        android:nextFocusRight="@+id/LowGridView"
         android:paddingLeft="20px"
         android:paddingRight="20px" />
 
@@ -21,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:clickable="true">
+        >
 
         <!--<VideoView-->
             <!--android:id="@+id/homeVideoView"-->
@@ -33,7 +34,9 @@
         <FrameLayout
             android:id="@+id/TopCenter"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+
+            android:paddingTop="10dp">
 
         </FrameLayout>
 
@@ -43,23 +46,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="#ff000000"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
+            android:focusable="false"
             android:visibility="visible">
 
         </FrameLayout>
-
-        <!--<GridView-->
-            <!--android:id="@+id/homeGridView"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:background="#ff000000"-->
-            <!--android:focusable="true"-->
-            <!--android:stretchMode="columnWidth"-->
-            <!--android:visibility="visible"-->
-            <!--tools:style="@android:style/Widget.Material.GridView" />-->
     </RelativeLayout>
 
     <ImageButton

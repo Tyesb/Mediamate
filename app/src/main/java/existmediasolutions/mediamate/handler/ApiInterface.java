@@ -15,14 +15,16 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
 
-    @GET("/api/devices/3")
+    @GET("/api/devices/1")
     Call<DeviceInformation> getDeviceInformation();
 //
-//    @GET("/api/users?")
+//   @GET("/api/users?")
 //    Call<UserList> doGetUserList(@Query("page") String page);
 //
-//    @FormUrlEncoded
-//    @POST("/api/users?")
-//    Call<UserList> doCreateUserWithField(@Field("name") String name, @Field("job") String job);
+   @FormUrlEncoded
+   @POST("/api/requests/new")
+   Call<String> doCreateRequest(@Field("MotelModelId") String MotelModelId, @Field("roomNo") String roomNo, @Field("requestInfo") String requestinfo,
+                                @Field("CategoryModel") String CategoryModel,@Field("CategoryModelId") String RequestTime,@Field("RequestTime") String requestTime);
+
 }
 
