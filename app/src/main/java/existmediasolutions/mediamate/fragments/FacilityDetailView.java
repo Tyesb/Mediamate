@@ -89,7 +89,9 @@ public class FacilityDetailView extends Fragment {
 
     private void updateImageView(){
         Picasso.with(getContext()).load((FacilityImageUrl)).placeholder(R.drawable.spaicon)
+                .fit()
                 .into(facilityDetailImageDisplay);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

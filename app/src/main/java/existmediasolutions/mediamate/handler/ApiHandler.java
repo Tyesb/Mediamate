@@ -43,10 +43,10 @@ public class ApiHandler {
 //        return deviceInformation;
     }
 
-    public void sendRequest(){
+    public void sendRequest(String motelModelId, String roomNo, String requestInfo, String categoryModelId, String requestTime){
 //        apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Request request = new Request("1","222","sent From app", "","1","2017-09-21T18:10:31");
-        Call call1 = apiInterface.doCreateRequest("1","222","sent From app", "","1","2017-09-21T18:10:31");
+        Call call1 = apiInterface.doCreateRequest(motelModelId,roomNo,requestInfo,"",categoryModelId,requestTime);
         call1.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {

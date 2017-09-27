@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.labo.kaji.fragmentanimations.CubeAnimation;
 import com.labo.kaji.fragmentanimations.FlipAnimation;
@@ -38,6 +40,9 @@ public class FacilityFragment extends Fragment {
     private int mColumnCount = 4;
     private OnListFragmentInteractionListener mListener;
     private OnFacilityFragmentReadyListener readyListener;
+    private ImageButton conBreak;
+    private ImageButton cookedBreak;
+    private ImageButton roomServ;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -68,7 +73,10 @@ public class FacilityFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

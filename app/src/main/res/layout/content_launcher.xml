@@ -15,6 +15,7 @@
         android:layout_weight="0.1"
         android:background="#ff000000"
         android:nextFocusRight="@+id/LowGridView"
+        android:onClick="LaunchNetflix"
         android:paddingLeft="20px"
         android:paddingRight="20px" />
 

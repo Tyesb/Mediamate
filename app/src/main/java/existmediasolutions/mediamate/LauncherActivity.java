@@ -2,6 +2,7 @@ package existmediasolutions.mediamate;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import existmediasolutions.mediamate.fragments.AroundMe;
 import existmediasolutions.mediamate.fragments.FacilityDetailView;
 import existmediasolutions.mediamate.fragments.FacilityFragment;
 import existmediasolutions.mediamate.fragments.MotelVideoView;
+import existmediasolutions.mediamate.fragments.Requests;
 import existmediasolutions.mediamate.fragments.dummy.DummyContent;
 import existmediasolutions.mediamate.handler.ApiClient;
 import existmediasolutions.mediamate.handler.ApiHandler;
@@ -46,7 +48,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LauncherActivity extends AppCompatActivity implements MotelVideoView.OnFragmentInteractionListener, FacilityFragment.OnListFragmentInteractionListener,
-        FacilityFragment.OnFacilityFragmentReadyListener, FacilityDetailView.OnFragmentInteractionListener, ApiHandler.onApiCallbackResponse, OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+        FacilityFragment.OnFacilityFragmentReadyListener, FacilityDetailView.OnFragmentInteractionListener, ApiHandler.onApiCallbackResponse, OnMapReadyCallback, GoogleMap.OnMarkerClickListener, Requests.OnRequestFragmentInteractionListener {
     ApiHandler apiHandler = new ApiHandler();
     ImageView leftHomeButton;
     ImageView rightHomeButton;
@@ -188,13 +190,31 @@ public class LauncherActivity extends AppCompatActivity implements MotelVideoVie
         } else if (title == "Go Back") {
             swapToMainMenu();
         } else if (title == "Requests") {
-            sendRequest();
+            swapToRequestFragment();
         } else {
             Facility facility = this.lfacilities.get(position);
             swapToFacilitiesDetailView(facility.getFacilityDescription(), facility.getFacilityImage());
         }
 
     }
+
+    public void LaunchNetflix(){
+        Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.netflix.mediaclient");
+        startActivity(launchIntent);
+    }
+
+    public void onRequestFragmentInteraction(String id){
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show();
+    }
+
+    private void swapToRequestFragment(){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.TopCenter, Requests.newInstance())
+                .commit();
+
+    }
+
 
     private void swapToMainMenu() {
         getSupportFragmentManager()
@@ -273,8 +293,6 @@ public class LauncherActivity extends AppCompatActivity implements MotelVideoVie
                 .commit();
     }
 
-    private void sendRequest(){
-        apiHandler.sendRequest();
-    }
+
 }
 
